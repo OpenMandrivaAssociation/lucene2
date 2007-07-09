@@ -1,38 +1,36 @@
-%define section         devel
-%define version         2.1.0
-%define nversion        2.1.1-dev
+%define section         free
+%define nversion        2.2.0
 %define gcj_support     1
-%if %{gcj_support}
-ExclusiveArch: %{ix86} x86_64 ppc
-%endif
 
-Summary:        High-performance, full-featured text search engine
 Name:           lucene2
-Version:        %{version}
+Version:        2.2.0
 Release:        %mkrel 1
 Epoch:          0
+Summary:        High-performance, full-featured text search engine
 License:        Apache License
 URL:            http://lucene.apache.org/
 Group:          Development/Java
-#Vendor:        JPackage Project
-#Distribution:  JPackage
 Source0:        http://apache.tradebit.com/pub/lucene/java/lucene-%{version}-src.tar.gz
 Source1:        http://apache.tradebit.com/pub/lucene/java/lucene-%{version}-src.tar.gz.asc
+Patch0:         lucene-2.2.0-javadoc-no-build-contrib.patch
 BuildRequires:  ant
+BuildRequires:  jakarta-commons-digester
 BuildRequires:  javacc
 BuildRequires:  java-devel
 BuildRequires:  java-javadoc
 BuildRequires:  jpackage-utils
+BuildRequires:  jtidy
+BuildRequires:  junit
 BuildRequires:  zip
 %if !%{gcj_support}
 BuildArch:      noarch
 %else
-BuildRequires:  java-1.4.2-gcj-compat-devel
-Requires(post): java-1.4.2-gcj-compat
-Requires(postun): java-1.4.2-gcj-compat
+BuildRequires:  java-gcj-compat-devel
+Requires(post): java-gcj-compat
+Requires(postun): java-gcj-compat
 %endif
 
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 Jakarta Lucene is a high-performance, full-featured text search engine
@@ -65,12 +63,16 @@ Source for Lucene.
 
 %prep
 %setup -q -n lucene-%{version}
+%patch0 -p1
+%{_bindir}/find . -name '*.jar' | %{_bindir}/xargs -t %{__rm}
+%{__perl} -pi -e 's/<javac( |$)/<javac nowarn="true" /g' *build.xml
+%{__perl} -pi -e 's/source=.*$/source="1.5"/;' build.xml
 
 %build
 mkdir -p docs
-export CLASSPATH=
-export OPT_JAR_LIST=
-%ant \
+export CLASSPATH=$(build-classpath jtidy junit jakarta-commons-digester)
+export OPT_JAR_LIST=:
+%{ant} \
   -Djavacc.home=%{_bindir}/javacc \
   -Djavacc.jar=%{_javadir}/javacc.jar \
   -Djavacc.jar.dir=%{_javadir} \
@@ -111,10 +113,6 @@ ln -s %{name}-%{version}-src.zip $RPM_BUILD_ROOT%{_datadir}/%{name}/%{name}-src.
 %{_bindir}/aot-compile-rpm
 %endif
 
-%post javadoc
-rm -f %{_javadocdir}/%{name}
-ln -s %{name}-%{version} %{_javadocdir}/%{name}
-
 %if %{gcj_support}
 %post
 %{update_gcjdb}
@@ -122,7 +120,6 @@ ln -s %{name}-%{version} %{_javadocdir}/%{name}
 %postun
 %{clean_gcjdb}
 %endif
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -139,7 +136,7 @@ rm -rf $RPM_BUILD_ROOT
 %files javadoc
 %defattr(0644,root,root,0755)
 %{_javadocdir}/%{name}-%{version}
-%ghost %{_javadocdir}/%{name}
+%dir %{_javadocdir}/%{name}
 
 %files demo
 %defattr(0644,root,root,0755)
