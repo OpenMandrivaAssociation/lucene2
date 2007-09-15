@@ -4,7 +4,7 @@
 
 Name:           lucene2
 Version:        2.2.0
-Release:        %mkrel 1
+Release:        %mkrel 2
 Epoch:          0
 Summary:        High-performance, full-featured text search engine
 License:        Apache License
@@ -25,8 +25,6 @@ BuildRequires:  java-devel
 BuildArch:      noarch
 %else
 BuildRequires:  java-gcj-compat-devel
-Requires(post): java-gcj-compat
-Requires(postun): java-gcj-compat
 %endif
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
