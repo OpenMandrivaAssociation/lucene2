@@ -4,7 +4,7 @@
 
 Name:           lucene2
 Version:        2.2.0
-Release:        %mkrel 2
+Release:        %mkrel 3
 Epoch:          0
 Summary:        High-performance, full-featured text search engine
 License:        Apache License
@@ -18,7 +18,7 @@ BuildRequires:  ant
 BuildRequires:  ant-nodeps
 BuildRequires:  javacc
 BuildRequires:  java-javadoc
-BuildRequires:  jpackage-utils
+BuildRequires:  java-rpmbuild
 BuildRequires:  zip
 %if !%{gcj_support}
 BuildRequires:  java-devel
