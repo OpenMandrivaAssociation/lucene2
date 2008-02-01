@@ -1,10 +1,10 @@
 %define section         free
-%define nversion        2.2.0
+%define nversion        2.3
 %define gcj_support     1
 
 Name:           lucene2
-Version:        2.2.0
-Release:        %mkrel 3
+Version:        2.3.0
+Release:        %mkrel 0.0.1
 Epoch:          0
 Summary:        High-performance, full-featured text search engine
 License:        Apache License
@@ -12,7 +12,7 @@ URL:            http://lucene.apache.org/
 Group:          Development/Java
 Source0:        http://apache.tradebit.com/pub/lucene/java/lucene-%{version}-src.tar.gz
 Source1:        http://apache.tradebit.com/pub/lucene/java/lucene-%{version}-src.tar.gz.asc
-Patch0:         lucene-2.2.0-javadoc-no-build-contrib.patch
+Patch0:         lucene-2.3.0-javadoc-no-build-contrib.patch
 Patch1:         lucene-2.2.0-javacc-location.patch
 BuildRequires:  ant
 BuildRequires:  ant-nodeps
