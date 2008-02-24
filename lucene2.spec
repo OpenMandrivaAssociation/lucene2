@@ -3,7 +3,7 @@
 %define gcj_support     1
 
 Name:           lucene2
-Version:        2.3.0
+Version:        2.3.1
 Release:        %mkrel 0.0.1
 Epoch:          0
 Summary:        High-performance, full-featured text search engine
@@ -105,9 +105,7 @@ export OPT_JAR_LIST="ant/ant-nodeps"
 %{__tar} xOf %{SOURCE0} | zip -r %{buildroot}%{_datadir}/%{name}/%{name}-%{version}-src.zip -
 %{__ln_s} %{name}-%{version}-src.zip %{buildroot}%{_datadir}/%{name}/%{name}-src.zip
 
-%if %{gcj_support}
-%{_bindir}/aot-compile-rpm
-%endif
+%{gcj_compile}
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -124,10 +122,7 @@ export OPT_JAR_LIST="ant/ant-nodeps"
 %defattr(0644,root,root,0755)
 %doc CHANGES.txt LICENSE.txt README.txt
 %{_javadir}/*
-%if %{gcj_support}
-%dir %{_libdir}/gcj/%{name}
-%attr(-,root,root) %{_libdir}/gcj/%{name}/*
-%endif
+%{gcj_files}
 
 %files javadoc
 %defattr(0644,root,root,0755)
