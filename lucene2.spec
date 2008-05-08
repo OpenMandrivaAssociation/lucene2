@@ -3,7 +3,7 @@
 %define gcj_support     1
 
 Name:           lucene2
-Version:        2.3.1
+Version:        2.3.2
 Release:        %mkrel 0.0.1
 Epoch:          0
 Summary:        High-performance, full-featured text search engine
