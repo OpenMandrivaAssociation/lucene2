@@ -4,7 +4,7 @@
 
 Name:           lucene2
 Version:        2.3.2
-Release:        %mkrel 0.0.1
+Release:        %mkrel 2.0.1
 Epoch:          0
 Summary:        High-performance, full-featured text search engine
 License:        Apache License
