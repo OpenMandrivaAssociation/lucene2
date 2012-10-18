@@ -27,8 +27,6 @@ BuildArch:      noarch
 BuildRequires:  java-gcj-compat-devel
 %endif
 
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
-
 %description
 Jakarta Lucene is a high-performance, full-featured text search engine
 written entirely in Java. It is a technology suitable for nearly any
@@ -106,9 +104,6 @@ export OPT_JAR_LIST="ant/ant-nodeps"
 %{__ln_s} %{name}-%{version}-src.zip %{buildroot}%{_datadir}/%{name}/%{name}-src.zip
 
 %{gcj_compile}
-
-%clean
-%{__rm} -rf %{buildroot}
 
 %if %{gcj_support}
 %post
