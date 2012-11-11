@@ -1,0 +1,11 @@
+--- lucene-2.3.0/build.xml.orig	2008-01-21 02:29:41.000000000 +0100
++++ lucene-2.3.0/build.xml	2008-02-01 20:56:09.000000000 +0100
+@@ -215,7 +215,7 @@
+                    failonerror="false"/>
+   </target>
+   	
+-  <target name="javadocs-all" description="Generate javadoc for core, demo and contrib classes" depends="build-contrib">
++  <target name="javadocs-all" description="Generate javadoc for core, demo and contrib classes">
+   	<sequential>
+       <mkdir dir="${javadoc.dir}"/>
+       <invoke-javadoc
