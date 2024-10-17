@@ -8,7 +8,7 @@ Release:        %mkrel 2.0.2
 Epoch:          0
 Summary:        High-performance, full-featured text search engine
 License:        Apache License
-URL:            http://lucene.apache.org/
+URL:            https://lucene.apache.org/
 Group:          Development/Java
 Source0:        http://apache.tradebit.com/pub/lucene/java/lucene-%{version}-src.tar.gz
 Source1:        http://apache.tradebit.com/pub/lucene/java/lucene-%{version}-src.tar.gz.asc
